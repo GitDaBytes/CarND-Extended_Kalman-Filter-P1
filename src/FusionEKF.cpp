@@ -210,12 +210,10 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
 		  if (fabs(px) < 0.0001) {
 			  px = 0.0001;
-			  cout << "px too small" << endl;
 		  }
 
 		  if (fabs(py) < 0.0001) {
 			  py = 0.0001;
-			  cout << "py too small" << endl;
 		  }
 
 		  rho = sqrt(px*px + py * py);
@@ -236,7 +234,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 
 	  // don't update measurement if we can't compute the Jacobian
 	  if (Hj_.isZero(0)) {
-		  cout << "Hj is zero" << endl;
 		  return;
 	  }
 
@@ -247,7 +244,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
 	  ekf_.UpdateEKF(measurement_pack.raw_measurements_);
   } else {
     // Laser updates
-	  cout << "Laser update" << endl;
 	  ekf_.H_ = H_laser_;
 	  ekf_.R_ = R_laser_;
 	  ekf_.Update(measurement_pack.raw_measurements_);
